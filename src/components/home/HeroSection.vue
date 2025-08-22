@@ -5,13 +5,11 @@
     <!-- Background Image Overlay -->
     <div class="absolute inset-0 bg-black bg-opacity-40 dark:bg-opacity-50"></div>
 
-    <!-- Background Image -->
-    <div
-      class="absolute inset-0 bg-cover bg-center bg-no-repeat"
-      style="
-        background-image: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&h=1080&fit=crop');
-      "
-    ></div>
+    <!-- Background Video -->
+    <video class="absolute inset-0 w-full h-full object-cover" autoplay muted loop playsinline>
+      <source src="https://cdn.pixabay.com/video/2024/09/07/230248_large.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
 
     <!-- Content -->
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">

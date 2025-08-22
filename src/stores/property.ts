@@ -375,6 +375,7 @@ export const usePropertyStore = defineStore('property', () => {
 })
 
 // Mock data generator
+// Mock data generator
 function generateMockProperties(language: 'en' | 'th' = 'en'): Property[] {
   try {
     const mockProperties: Property[] = []
@@ -384,6 +385,29 @@ function generateMockProperties(language: 'en' | 'th' = 'en'): Property[] {
     const states = translations.states
     const propertyTypes = Object.values(PropertyType)
     const statuses = [PropertyStatus.FOR_SALE, PropertyStatus.FOR_RENT]
+
+    // --- เพิ่มชุดรูปภาพที่นี่ ---
+    const condoImages = [
+      'https://images.unsplash.com/photo-1571905837410-87605d34ad73?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1719884630688-45ca69d68870?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1623681153547-64bf22a2e93f?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1630699144057-7d5249ef4e6a?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1603072845032-7b5bd641a82a?w=800&h=600&fit=crop',
+    ]
+    const houseImages = [
+      'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop',
+    ]
+    const defaultImages = houseImages
+
+    // Map ประเภท -> รูปภาพ
+    const imageMap: Record<string, string[]> = {
+      condo: condoImages,
+      house: houseImages,
+      // ถ้ามี type อื่น เพิ่มได้ที่นี่
+    }
 
     console.log('Property types:', propertyTypes)
     console.log('Property statuses:', statuses)
@@ -459,11 +483,8 @@ function generateMockProperties(language: 'en' | 'th' = 'en'): Property[] {
                 : -74.006 + (Math.random() - 0.5) * 10,
           },
         },
-        images: [
-          `https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&h=600&fit=crop`,
-          `https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&h=600&fit=crop`,
-          `https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop`,
-        ],
+        // --- ตรงนี้คือส่วนที่แก้ ---
+        images: (imageMap[type] || defaultImages).sort(() => 0.5 - Math.random()).slice(0, 3),
         features: translations.features
           .sort(() => 0.5 - Math.random())
           .slice(0, Math.floor(Math.random() * 4) + 2),
